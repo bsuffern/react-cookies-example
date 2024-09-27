@@ -7,15 +7,15 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
+/pwa/node_modules
 dist
 dist-ssr
 dev-dist
 *.local
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.json
+./pwa/vscode/*
+!./pwa/vscode/extensions.json
 .idea
 .DS_Store
 *.suo
@@ -23,3 +23,5 @@ dev-dist
 *.njsproj
 *.sln
 *.sw?
+
+/dotnet/.vs
