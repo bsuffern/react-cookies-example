@@ -1,8 +1,8 @@
 [
   {
-    "ContainingType": "dotnet.Controllers.CartController",
+    "ContainingType": "dotnet.Controllers.CartsController",
     "Method": "PostCart",
-    "RelativePath": "api/Cart",
+    "RelativePath": "api/Carts",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -16,9 +16,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "dotnet.Controllers.CartController",
+    "ContainingType": "dotnet.Controllers.CartsController",
     "Method": "GetCart",
-    "RelativePath": "api/Cart/{cartId}",
+    "RelativePath": "api/Carts/{cartId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -32,9 +32,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "dotnet.Controllers.CartController",
+    "ContainingType": "dotnet.Controllers.CartsController",
     "Method": "PutCart",
-    "RelativePath": "api/Cart/{cartId}",
+    "RelativePath": "api/Carts/{cartId}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -47,6 +47,53 @@
       {
         "Name": "request",
         "Type": "dotnet.Models.PutCartRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "dotnet.Controllers.CartsController",
+    "Method": "DeleteProduct",
+    "RelativePath": "api/Carts/{cartId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cartId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "productId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "dotnet.Controllers.ProductsController",
+    "Method": "GetProducts",
+    "RelativePath": "api/Products",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "dotnet.Controllers.ProductsController",
+    "Method": "PostProduct",
+    "RelativePath": "api/Products",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "product",
+        "Type": "dotnet.Models.Product",
         "IsRequired": true
       }
     ],
