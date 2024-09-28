@@ -12,10 +12,12 @@ namespace dotnet.Controllers;
 public class CartsController : ControllerBase
 {
     private readonly CartsService _cartsService;
+    private readonly ProductsService _productsService;
 
-    public CartsController(CartsService cartsService)
+    public CartsController(CartsService cartsService, ProductsService productsService)
     {
         _cartsService = cartsService;
+        _productsService = productsService;
     }
 
     [HttpGet("{cartId}")]
@@ -35,7 +37,17 @@ public class CartsController : ControllerBase
             return NotFound("No cart found!");
         }
 
-        return Ok(cart);
+        // Loop over cart items and create GetCartResponse
+        List<GetCartResponse> response = new List<GetCartResponse>();
+
+        foreach (var item in cart.Products!)
+        {
+            var product = await _productsService.GetAsync(item.ProductId);
+
+            response.Add(new GetCartResponse { Quantity = item.Quantity, Product = product! });
+        }
+
+        return Ok(response);
     }
 
     [HttpPost]
@@ -51,7 +63,7 @@ public class CartsController : ControllerBase
 
         // Check if product exists in our database
         
-        var product = await .GetAsync(newCart.Products[0].ProductId);
+        var product = await _productsService.GetAsync(newCart.Products[0].ProductId);
 
         if (product == null)
         {
@@ -89,9 +101,12 @@ public class CartsController : ControllerBase
 
         // Check if product exists in our database
 
+        var checkProduct = await _productsService.GetAsync(request.ProductId);
 
-
-
+        if (checkProduct == null)
+        {
+            return NotFound("Product not found!");
+        }
 
 
         var products = cart.Products;

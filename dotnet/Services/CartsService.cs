@@ -17,8 +17,8 @@ public class CartsService
         _cartsCollection = mongoDatabase.GetCollection<Cart>(fashionWebsiteDatabaseSettings.Value.CartsCollectionName);
     }
 
-    public async Task<List<Cart>> GetAsync() =>
-        await _cartsCollection.Find(_ => true).ToListAsync();
+    public async Task<List<Cart>> GetAsync(int limit) =>
+        await _cartsCollection.Find(_ => true).Limit(limit).ToListAsync();
 
     public async Task<Cart?> GetAsync(string id) =>
         await _cartsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
