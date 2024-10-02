@@ -1,11 +1,13 @@
-﻿namespace dotnet.Models;
-
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-public class PutCartRequest
+namespace dotnet.Models;
+
+public class CartItem
 {
     [BsonRepresentation(BsonType.ObjectId)]
     public string ProductId { get; set; } = null!;
-    public bool IncreaseQuantity { get; set; }
+
+    [BsonElement("Quantity")]
+    public int Quantity { get; set; }
 }

@@ -44,3 +44,5 @@ C:\projects\react-cookies-example\dotnet\obj\Debug\net8.0\refint\dotnet.dll
 C:\projects\react-cookies-example\dotnet\obj\Debug\net8.0\dotnet.pdb
 C:\projects\react-cookies-example\dotnet\obj\Debug\net8.0\dotnet.genruntimeconfig.cache
 C:\projects\react-cookies-example\dotnet\obj\Debug\net8.0\ref\dotnet.dll
+C:\projects\react-cookies-example\dotnet\bin\Debug\net8.0\MediatR.dll
+C:\projects\react-cookies-example\dotnet\bin\Debug\net8.0\MediatR.Contracts.dll

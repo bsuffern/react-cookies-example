@@ -1,15 +1,20 @@
 [
   {
     "ContainingType": "dotnet.Controllers.CartsController",
-    "Method": "PostCart",
+    "Method": "AddItemToNewCart",
     "RelativePath": "api/Carts",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "newCart",
-        "Type": "dotnet.Models.Cart",
+        "Name": "ProductId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "Quantity",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -17,14 +22,14 @@
   },
   {
     "ContainingType": "dotnet.Controllers.CartsController",
-    "Method": "GetCart",
+    "Method": "GetCartById",
     "RelativePath": "api/Carts/{cartId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "cartId",
+        "Name": "CartId",
         "Type": "System.String",
         "IsRequired": true
       }
@@ -33,20 +38,20 @@
   },
   {
     "ContainingType": "dotnet.Controllers.CartsController",
-    "Method": "PutCart",
+    "Method": "UpdateItemQuantity",
     "RelativePath": "api/Carts/{cartId}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "cartId",
+        "Name": "CartId",
         "Type": "System.String",
         "IsRequired": true
       },
       {
-        "Name": "request",
-        "Type": "dotnet.Models.PutCartRequest",
+        "Name": "Body",
+        "Type": "dotnet.Features.Carts.UpdateItemQuantity.UpdateItemQuantityBody",
         "IsRequired": true
       }
     ],
@@ -54,19 +59,19 @@
   },
   {
     "ContainingType": "dotnet.Controllers.CartsController",
-    "Method": "DeleteProduct",
-    "RelativePath": "api/Carts/{cartId}",
+    "Method": "DeleteItemFromCart",
+    "RelativePath": "api/Carts/{cartId}/{productId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "cartId",
+        "Name": "CartId",
         "Type": "System.String",
         "IsRequired": true
       },
       {
-        "Name": "productId",
+        "Name": "ProductId",
         "Type": "System.String",
         "IsRequired": true
       }
@@ -75,25 +80,31 @@
   },
   {
     "ContainingType": "dotnet.Controllers.ProductsController",
-    "Method": "GetProducts",
-    "RelativePath": "api/Products",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "dotnet.Controllers.ProductsController",
-    "Method": "PostProduct",
+    "Method": "CreateProduct",
     "RelativePath": "api/Products",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "product",
-        "Type": "dotnet.Models.Product",
+        "Name": "request",
+        "Type": "dotnet.Features.Products.CreateProduct.CreateProduct",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "dotnet.Controllers.ProductsController",
+    "Method": "SearchProducts",
+    "RelativePath": "api/Products/{Limit}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Limit",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

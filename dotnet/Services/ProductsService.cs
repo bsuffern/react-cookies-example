@@ -18,18 +18,18 @@ public class ProductsService
 
     }
 
-    public async Task<List<Product>> GetAsync() =>
-        await _productsCollection.Find(_ => true).ToListAsync();
+    public async Task<List<Product>> Search(int limit) =>
+        await _productsCollection.Find(_ => true).Limit(limit).ToListAsync();
 
-    public async Task<Product?> GetAsync(string id) =>
+    public async Task<Product?> Get(string id) =>
         await _productsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
-    public async Task CreateAsync(Product newProduct) =>
+    public async Task Create(Product newProduct) =>
         await _productsCollection.InsertOneAsync(newProduct);
 
-    public async Task UpdateAsync(string id, Product updatedProduct) =>
+    public async Task Update(string id, Product updatedProduct) =>
         await _productsCollection.ReplaceOneAsync(x => x.Id == id, updatedProduct);
 
-    public async Task RemoveAsync(string id) =>
+    public async Task Remove(string id) =>
         await _productsCollection.DeleteOneAsync(x => x.Id == id);
 }

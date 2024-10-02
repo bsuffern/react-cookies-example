@@ -9,5 +9,5 @@ public class Cart
     public string? Id { get; set; }
 
     [BsonElement("Products")]
-    public List<CartProduct>? Products { get; set; }
+    public List<CartItem>? Products { get; set; }
 }
