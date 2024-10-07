@@ -1,6 +1,6 @@
 [
   {
-    "ContainingType": "dotnet.Controllers.CartsController",
+    "ContainingType": "dotnet.Features.Carts.CartsController",
     "Method": "AddItemToNewCart",
     "RelativePath": "api/Carts",
     "HttpMethod": "POST",
@@ -8,22 +8,17 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "ProductId",
-        "Type": "System.String",
-        "IsRequired": true
-      },
-      {
-        "Name": "Quantity",
-        "Type": "System.Int32",
+        "Name": "Body",
+        "Type": "dotnet.Features.Carts.Operations.AddItemToNewCartBody",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "dotnet.Controllers.CartsController",
+    "ContainingType": "dotnet.Features.Carts.CartsController",
     "Method": "GetCartById",
-    "RelativePath": "api/Carts/{cartId}",
+    "RelativePath": "api/Carts/{CartId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -37,9 +32,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "dotnet.Controllers.CartsController",
+    "ContainingType": "dotnet.Features.Carts.CartsController",
     "Method": "UpdateItemQuantity",
-    "RelativePath": "api/Carts/{cartId}",
+    "RelativePath": "api/Carts/{CartId}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -51,16 +46,16 @@
       },
       {
         "Name": "Body",
-        "Type": "dotnet.Features.Carts.UpdateItemQuantity.UpdateItemQuantityBody",
+        "Type": "dotnet.Features.Carts.Operations.UpdateItemQuantityBody",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "dotnet.Controllers.CartsController",
+    "ContainingType": "dotnet.Features.Carts.CartsController",
     "Method": "DeleteItemFromCart",
-    "RelativePath": "api/Carts/{cartId}/{productId}",
+    "RelativePath": "api/Carts/{CartId}/{ProductId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -79,7 +74,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "dotnet.Controllers.ProductsController",
+    "ContainingType": "dotnet.Features.Products.ProductsController",
     "Method": "CreateProduct",
     "RelativePath": "api/Products",
     "HttpMethod": "POST",
@@ -88,14 +83,14 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "dotnet.Features.Products.CreateProduct.CreateProduct",
+        "Type": "dotnet.Features.Products.Operations.CreateProduct",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "dotnet.Controllers.ProductsController",
+    "ContainingType": "dotnet.Features.Products.ProductsController",
     "Method": "SearchProducts",
     "RelativePath": "api/Products/{Limit}",
     "HttpMethod": "GET",

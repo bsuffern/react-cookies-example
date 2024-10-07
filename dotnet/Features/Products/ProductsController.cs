@@ -6,6 +6,8 @@ using MongoDB.Bson.Serialization.Attributes;
 using MediatR;
 using MongoDB.Driver.Search;
 using dotnet.Features.Products.Operations;
+using Ardalis.Result.AspNetCore;
+using Ardalis.Result;
 
 namespace dotnet.Features.Products;
 
@@ -20,35 +22,21 @@ public class ProductsController : ControllerBase
         _sender = sender;
     }
 
+    [TranslateResultToActionResult]
+    [ExpectedFailures(ResultStatus.Invalid)]
     [HttpGet("{Limit}")]
     public async Task<IActionResult> SearchProducts(SearchProducts request)
     {
         var result = await _sender.Send(request);
-
-        if (result.Success == false)
-        {
-            if (result.ErrorMessage == "Invalid Request!")
-            {
-                return BadRequest(result.ErrorMessage);
-            }
-        }
-
-        return Ok(result.Products);
+        return Ok(result);
     }
 
+    [TranslateResultToActionResult]
+    [ExpectedFailures(ResultStatus.Invalid)]
     [HttpPost]
     public async Task<IActionResult> CreateProduct([FromBody] CreateProduct request)
     {
         var result = await _sender.Send(request);
-
-        if (result.Success == false)
-        {
-            if (result.ErrorMessage == "Invalid Request!")
-            {
-                return BadRequest(result.ErrorMessage);
-            }
-        }
-
-        return Ok(result.ProductId);
+        return Ok(result);
     }
 }

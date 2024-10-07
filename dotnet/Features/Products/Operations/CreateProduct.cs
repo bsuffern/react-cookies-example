@@ -1,12 +1,14 @@
-﻿using dotnet.Models;
+﻿using Ardalis.Result;
+using dotnet.Models;
 using dotnet.Services;
+using FluentValidation;
 using MediatR;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace dotnet.Features.Products.Operations;
 
-public class CreateProduct : IRequest<CreateProductResponse>
+public class CreateProduct : IRequest<Result<CreateProductResponse>>
 {
     [BsonElement("Name")]
     public string Name { get; set; } = null!;
@@ -25,12 +27,22 @@ public class CreateProductResponse
 {
     public bool Success { get; set; }
     public string? ErrorMessage { get; set; }
-
-    [BsonRepresentation(BsonType.ObjectId)]
     public string ProductId { get; set; } = null!;
 }
 
-public class CreateProductHandler : IRequestHandler<CreateProduct, CreateProductResponse>
+public class CreateProductValdiator : AbstractValidator<CreateProduct>
+{
+    public CreateProductValdiator()
+    {
+        RuleFor(x => x).NotNull().WithMessage("Invalid Request!");
+        RuleFor(x => x.Price).NotEqual(0).WithMessage("Invalid Request!");
+        RuleFor(x => x.Name).NotNull().WithMessage("Invalid Request!");
+        RuleFor(x => x.Description).NotNull().WithMessage("Invalid Request!");
+        RuleFor(x => x.ImageSrc).NotNull().WithMessage("Invalid Request!"); // Every field is specified
+    }
+}
+
+public class CreateProductHandler : IRequestHandler<CreateProduct, Result<CreateProductResponse>>
 {
     private readonly ProductsService _productsService;
 
@@ -39,18 +51,8 @@ public class CreateProductHandler : IRequestHandler<CreateProduct, CreateProduct
         _productsService = productsService;
     }
 
-    public async Task<CreateProductResponse> Handle(CreateProduct request, CancellationToken cancellationToken)
+    public async Task<Result<CreateProductResponse>> Handle(CreateProduct request, CancellationToken cancellationToken)
     {
-        // Check if request is invalid
-        if (request == null ||
-            request.Price == 0 ||
-            request.Name == null ||
-            request.Description == null ||
-            request.ImageSrc == null)
-        {
-            return new CreateProductResponse { Success = false, ErrorMessage = "Invalid Request!" };
-        }
-
         // Create product object
         Product product = new()
         {
@@ -62,6 +64,6 @@ public class CreateProductHandler : IRequestHandler<CreateProduct, CreateProduct
 
         await _productsService.Create(product);
 
-        return new CreateProductResponse { Success = true, ProductId = product.Id! };
+        return Result<CreateProductResponse>.Success(new CreateProductResponse { Success = true, ProductId = product.Id! });
     }
 }

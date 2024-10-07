@@ -1,12 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "hDx1bCAaO/I=",
+  "dgSpecHash": "s9vCzdjzlWM=",
   "success": true,
   "projectFilePath": "C:\\projects\\react-cookies-example\\dotnet\\dotnet.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\brode\\.nuget\\packages\\ardalis.result\\10.0.0\\ardalis.result.10.0.0.nupkg.sha512",
+    "C:\\Users\\brode\\.nuget\\packages\\ardalis.result.aspnetcore\\10.0.0\\ardalis.result.aspnetcore.10.0.0.nupkg.sha512",
     "C:\\Users\\brode\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\brode\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",
     "C:\\Users\\brode\\.nuget\\packages\\dnsclient\\1.6.1\\dnsclient.1.6.1.nupkg.sha512",
+    "C:\\Users\\brode\\.nuget\\packages\\fluentvalidation\\11.10.0\\fluentvalidation.11.10.0.nupkg.sha512",
+    "C:\\Users\\brode\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.10.0\\fluentvalidation.dependencyinjectionextensions.11.10.0.nupkg.sha512",
     "C:\\Users\\brode\\.nuget\\packages\\mediatr\\12.4.1\\mediatr.12.4.1.nupkg.sha512",
     "C:\\Users\\brode\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\brode\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",

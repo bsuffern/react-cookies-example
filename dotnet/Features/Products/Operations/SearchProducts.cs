@@ -1,11 +1,13 @@
-﻿using dotnet.Models;
+﻿using Ardalis.Result;
+using dotnet.Models;
 using dotnet.Services;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace dotnet.Features.Products.Operations;
 
-public class SearchProducts : IRequest<SearchProductsResponse>
+public class SearchProducts : IRequest<Result<SearchProductsResponse>>
 {
     [FromRoute]
     public int Limit { get; set; }
@@ -18,7 +20,16 @@ public class SearchProductsResponse
     public List<Product>? Products { get; set; }
 }
 
-public class SearchProductsHandler : IRequestHandler<SearchProducts, SearchProductsResponse>
+public class SearchProductsValdiator : AbstractValidator<SearchProducts>
+{
+    public SearchProductsValdiator()
+    {
+        RuleFor(x => x).NotNull().WithMessage("Invalid Request!"); // null request
+        RuleFor(x => x.Limit).NotEqual(0).WithMessage("Invalid Request!"); // limit supplied
+    }
+}
+
+public class SearchProductsHandler : IRequestHandler<SearchProducts, Result<SearchProductsResponse>>
 {
     private readonly ProductsService _productsService;
 
@@ -27,17 +38,9 @@ public class SearchProductsHandler : IRequestHandler<SearchProducts, SearchProdu
         _productsService = productsService;
     }
 
-    public async Task<SearchProductsResponse> Handle(SearchProducts request, CancellationToken cancellationToken)
+    public async Task<Result<SearchProductsResponse>> Handle(SearchProducts request, CancellationToken cancellationToken)
     {
-        // Check if request is invalid
-        if (request == null ||
-            request.Limit == 0)
-        {
-            return new SearchProductsResponse { Success = false, ErrorMessage = "Invalid Request!" };
-        }
-
         var products = await _productsService.Search(request.Limit);
-
-        return new SearchProductsResponse { Success = true, Products = products };
+        return Result<SearchProductsResponse>.Success(new SearchProductsResponse { Success = true, Products = products });
     }
 }

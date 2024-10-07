@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson.Serialization.Attributes;
 using MediatR;
 using dotnet.Features.Carts.Operations;
+using Ardalis.Result.AspNetCore;
+using Ardalis.Result;
 
 namespace dotnet.Features.Carts;
 
@@ -13,90 +15,46 @@ namespace dotnet.Features.Carts;
 [ApiController]
 public class CartsController : ControllerBase
 {
-    private readonly ISender _sender;
+    private readonly IMediator _mediator;
 
-    public CartsController(ISender sender)
+    public CartsController(IMediator mediator)
     {
-        _sender = sender;
+        _mediator = mediator;
     }
 
+    [TranslateResultToActionResult]
+    [ExpectedFailures(ResultStatus.NotFound, ResultStatus.Invalid)]
     [HttpGet("{CartId}")]
     public async Task<IActionResult> GetCartById(GetCartById request)
     {
-        var result = await _sender.Send(request);
-
-        if (result.Success == false)
-        {
-            if (result.ErrorMessage == "No cart found!")
-            {
-                return NotFound(result.ErrorMessage);
-            }
-            else if (result.ErrorMessage == "Invalid Request!")
-            {
-                return BadRequest(result.ErrorMessage);
-            }
-        }
-
-        return Ok(result.Cart);
+        var result = await _mediator.Send(request);
+        return Ok(result);
     }
 
+    [TranslateResultToActionResult]
+    [ExpectedFailures(ResultStatus.NotFound, ResultStatus.Invalid)]
     [HttpPost]
     public async Task<IActionResult> AddItemToNewCart(AddItemToNewCart request)
     {
-        var result = await _sender.Send(request);
-
-        if (result.Success == false)
-        {
-            if (result.ErrorMessage == "No product found!")
-            {
-                return NotFound(result.ErrorMessage);
-            }
-            else if (result.ErrorMessage == "Invalid Request!")
-            {
-                return BadRequest(result.ErrorMessage);
-            }
-        }
-
-        return Ok(result.CartId);
+        var result = await _mediator.Send(request);
+        return Ok(result);
     }
 
+    [TranslateResultToActionResult]
+    [ExpectedFailures(ResultStatus.NotFound, ResultStatus.Invalid)]
     [HttpPut("{CartId}")]
     public async Task<IActionResult> UpdateItemQuantity(UpdateItemQuantity request)
     {
-        var result = await _sender.Send(request);
-
-        if (result.Success == false)
-        {
-            if (result.ErrorMessage == "No product found!" || result.ErrorMessage == "No cart found!")
-            {
-                return NotFound(result.ErrorMessage);
-            }
-            else if (result.ErrorMessage == "Invalid Request!")
-            {
-                return BadRequest(result.ErrorMessage);
-            }
-        }
-
-        return Ok(result.Cart);
+        var result = await _mediator.Send(request);
+        return Ok(result);
     }
 
+    [TranslateResultToActionResult]
+    [ExpectedFailures(ResultStatus.NotFound, ResultStatus.Invalid)]
     [HttpDelete("{CartId}/{ProductId}")]
     public async Task<IActionResult> DeleteItemFromCart(DeleteItemFromCart request)
     {
-        var result = await _sender.Send(request);
-
-        if (result.Success == false)
-        {
-            if (result.ErrorMessage == "No product found!" || result.ErrorMessage == "No cart found!")
-            {
-                return NotFound(result.ErrorMessage);
-            }
-            else if (result.ErrorMessage == "Invalid Request!")
-            {
-                return BadRequest(result.ErrorMessage);
-            }
-        }
-
-        return Ok(result.DeletedProduct);
+        var result = await _mediator.Send(request);
+        return Ok(result);
     }
 }

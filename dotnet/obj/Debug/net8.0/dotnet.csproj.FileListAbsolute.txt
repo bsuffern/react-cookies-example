@@ -46,3 +46,7 @@ C:\projects\react-cookies-example\dotnet\obj\Debug\net8.0\dotnet.genruntimeconfi
 C:\projects\react-cookies-example\dotnet\obj\Debug\net8.0\ref\dotnet.dll
 C:\projects\react-cookies-example\dotnet\bin\Debug\net8.0\MediatR.dll
 C:\projects\react-cookies-example\dotnet\bin\Debug\net8.0\MediatR.Contracts.dll
+C:\projects\react-cookies-example\dotnet\bin\Debug\net8.0\Ardalis.Result.dll
+C:\projects\react-cookies-example\dotnet\bin\Debug\net8.0\Ardalis.Result.AspNetCore.dll
+C:\projects\react-cookies-example\dotnet\bin\Debug\net8.0\FluentValidation.dll
+C:\projects\react-cookies-example\dotnet\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
